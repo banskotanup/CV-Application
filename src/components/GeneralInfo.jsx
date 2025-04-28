@@ -1,9 +1,7 @@
 import { useState } from "react";
 
-export function GeneralInfo({ previewMode, data, updateData }) {
+export function GeneralInfo({ previewMode, data, updateData, isEditing, setIsEditing, generalStatus, setGeneralStatus }) {
   const { name, email, phone, address } = data;
-  const [isEditing, setIsEditing] = useState(true);
-  const [status, setStatus] = useState("editing");
   const [hasSavedOnce, setHasSavedOnce] = useState(false);
 
   function handleNameInput(e) {
@@ -24,14 +22,14 @@ export function GeneralInfo({ previewMode, data, updateData }) {
 
   async function handleEditSave(e) {
     e.preventDefault();
-    if (status === "editing") {
-      setStatus("saving");
+    if (generalStatus === "editing") {
+      setGeneralStatus("saving");
       await sendMessage();
       setIsEditing(!isEditing);
       setHasSavedOnce(true);
-      setStatus("saved");
-    } else if (status === "saved") {
-      setStatus("editing");
+      setGeneralStatus("saved");
+    } else if (generalStatus === "saved") {
+      setGeneralStatus("editing");
       await sendMessage();
       setIsEditing(!isEditing);
     }
@@ -110,7 +108,7 @@ export function GeneralInfo({ previewMode, data, updateData }) {
                 </button>
               </div>
             </form>
-            {status === "saving" && (
+            {generalStatus === "saving" && (
               <div>
                 <p>Saving...</p>
                 <div className="spinner"></div>
@@ -119,7 +117,7 @@ export function GeneralInfo({ previewMode, data, updateData }) {
           </div>
         ) : (
           <div>
-            {status === "saved" && (
+            {generalStatus === "saved" && (
               <div>
                 <h3>Preview:</h3>
                 <h4>Name: {name}</h4>
@@ -129,7 +127,7 @@ export function GeneralInfo({ previewMode, data, updateData }) {
                 <button onClick={handleEditSave}>Edit</button>
               </div>
             )}
-            {status === "editing" && (
+            {generalStatus === "editing" && (
               <div>
                 <p>Opening data in edit mode...</p>
                 <div className="spinner"></div>

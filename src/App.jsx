@@ -15,8 +15,14 @@ export default function App() {
   const [experience, setExperience] = useState([]);
 
   const [isGenerated, setIsGenerated] = useState(false);
-  const [status, setStatus] = useState("saving");
+  const [appStatus, setAppStatus] = useState("saving");
   const componentRef = useRef();
+  const [isEditing, setIsEditing] = useState(true);
+  const [eduEditing, setEduEditing] = useState(true);
+  const [expEditing, setExpEditing] = useState(true);
+  const [generalStatus, setGeneralStatus] = useState("editing");
+  const [educationStatus, setEducationStatus] = useState("editing");
+  const [experienceStatus, setExperienceStatus] = useState("editing");
 
   function updateGeneralInfo(field, value) {
     setGeneralInfo((prev) => ({
@@ -26,22 +32,22 @@ export default function App() {
   }
 
   async function handleGenerateClick() {
-    setStatus("gettingReady");
+   setAppStatus("gettingReady");
     await sendMessage();
-    setStatus("gettingInfo");
+   setAppStatus("gettingInfo");
     await sendMessage();
-    setStatus("generating");
+   setAppStatus("generating");
     await sendMessage();
     setIsGenerated(!isGenerated);
-    setStatus("generated");
+   setAppStatus("generated");
   }
 
   async function handleBackClick() {
-    //generating, gettingInfo, gettingReady ---> status
-    setStatus("goingBack");
+    //generating, gettingInfo, gettingReady ---> appStatus
+   setAppStatus("goingBack");
     await sendMessage();
     setIsGenerated(!isGenerated);
-    setStatus("saving");
+   setAppStatus("saving");
   }
 
   function handleDownload() {
@@ -67,41 +73,53 @@ export default function App() {
     <>
       {!isGenerated ? (
         <>
-          {status === "saving" && (
+          {appStatus === "saving" && (
             <div>
               <h1>CV Application</h1>
               <GeneralInfo
                 data={generalInfo}
                 updateData={updateGeneralInfo}
                 previewMode={false}
+                isEditing={isEditing}
+                setIsEditing={setIsEditing}
+                generalStatus={generalStatus}
+                setGeneralStatus={setGeneralStatus}
               />
               <Education
                 education={educationList}
                 setEducation={setEducationList}
                 previewMode={false}
+                eduEditing={eduEditing}
+                setEduEditing={setEduEditing}
+                educationStatus={educationStatus}
+                setEducationStatus={setEducationStatus}
               />
               <Experience
                 experience={experience}
                 setExperience={setExperience}
                 previewMode={false}
+                expEditing={expEditing}
+                setExpEditing={setExpEditing}
+                experienceStatus={experienceStatus}
+                setExperienceStatus={setExperienceStatus}
               />
               <button onClick={handleGenerateClick}>Generate cv</button>
             </div>
           )}
-          {status === "gettingReady" && (
+          {appStatus === "gettingReady" && (
             <div>
               <p>Getting ready...</p>
               <div className="spinner"></div>
             </div>
           )}
 
-          {status === "gettingInfo" && (
+          {appStatus === "gettingInfo" && (
             <div>
               <p>Getting info...</p>
               <div className="spinner"></div>
             </div>
           )}
-          {status === "generating" && (
+          {appStatus === "generating" && (
             <div>
               <p>Generating cv...</p>
               <div className="spinner"></div>
@@ -110,7 +128,7 @@ export default function App() {
         </>
       ) : (
         <>
-          {status === "generated" && (
+          {appStatus === "generated" && (
             <div>
               <h2 className="no-print">🎉 Your CV Preview 🎉</h2>
               <div ref={componentRef}>
@@ -123,7 +141,7 @@ export default function App() {
               <button onClick={handleBackClick}>Go Back</button>
             </div>
           )}
-          {status === "goingBack" && (
+          {appStatus === "goingBack" && (
             <div>
               <p>Opening cv editor...</p>
               <div className="spinner"></div>

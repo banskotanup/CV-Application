@@ -1,13 +1,19 @@
 import { useState } from "react";
 
-export function Education({ education, setEducation, previewMode }) {
+export function Education({
+  education,
+  setEducation,
+  previewMode,
+  eduEditing,
+  setEduEditing,
+  educationStatus,
+  setEducationStatus,
+}) {
   const [school, setSchool] = useState("");
   const [degree, setDegree] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [location, setLocation] = useState("");
-  const [isEditing, setIsEditing] = useState(true);
-  const [status, setStatus] = useState("editing");
   const [editIndex, setEditIndex] = useState(null);
   const [currentlyStudying, setCurrentlyStudying] = useState(false);
 
@@ -35,14 +41,14 @@ export function Education({ education, setEducation, previewMode }) {
     setEndDate("");
     setLocation("");
     setCurrentlyStudying(false);
-    setStatus("saving");
+    setEducationStatus("saving");
     await sendMessage();
-    setIsEditing(!isEditing);
-    setStatus("saved");
+    setEduEditing(!eduEditing);
+    setEducationStatus("saved");
   }
 
   async function handleEdit(index) {
-    setStatus("editing");
+    setEducationStatus("editing");
     await sendMessage();
     const edu = education[index];
     setSchool(edu.school);
@@ -52,22 +58,22 @@ export function Education({ education, setEducation, previewMode }) {
     setLocation(edu.location);
     setCurrentlyStudying(edu.currentlyStudying);
     setEditIndex(index);
-    setIsEditing(!isEditing);
+    setEduEditing(!eduEditing);
   }
 
   async function handleDelete(index) {
-    setStatus("deleted");
+    setEducationStatus("deleted");
     await sendMessage();
     const updatedEducation = education.filter((_, i) => i !== index);
     setEducation(updatedEducation);
-    setStatus("saved");
+    setEducationStatus("saved");
   }
 
   async function handleAdd() {
-    setStatus("opening");
+    setEducationStatus("opening");
     await sendMessage();
-    setStatus("saved");
-    setIsEditing(!isEditing);
+    setEducationStatus("saved");
+    setEduEditing(!eduEditing);
   }
 
   function sendMessage() {
@@ -107,7 +113,7 @@ export function Education({ education, setEducation, previewMode }) {
     return (
       <div>
         <h1>Education</h1>
-        {isEditing ? (
+        {eduEditing ? (
           <div>
             <form onSubmit={handleSubmit}>
               <div>
@@ -181,7 +187,7 @@ export function Education({ education, setEducation, previewMode }) {
                 </button>
               </div>
             </form>
-            {status === "saving" && (
+            {educationStatus === "saving" && (
               <div>
                 <p>Saving...</p>
                 <div className="spinner"></div>
@@ -190,7 +196,7 @@ export function Education({ education, setEducation, previewMode }) {
           </div>
         ) : (
           <div>
-            {status === "saved" && (
+            {educationStatus === "saved" && (
               <div>
                 <h3>Preview:</h3>
                 {education.length > 0 ? (
@@ -221,23 +227,26 @@ export function Education({ education, setEducation, previewMode }) {
                     <button onClick={handleAdd}>Add education</button>
                   </div>
                 ) : (
-                  <p>No education added yet</p>
+                  <>
+                    <p>No education added yet</p>
+                    <button onClick={handleAdd}>Add education</button>
+                  </>
                 )}
               </div>
             )}
-            {status === "deleted" && (
+            {educationStatus === "deleted" && (
               <div>
                 <p>Deleting...</p>
                 <div className="spinner"></div>
               </div>
             )}
-            {status === "editing" && (
+            {educationStatus === "editing" && (
               <div>
                 <p>Opening data in edit mode...</p>
                 <div className="spinner"></div>
               </div>
             )}
-            {status === "opening" && (
+            {educationStatus === "opening" && (
               <div>
                 <p>Opening form! Please wait...</p>
                 <div className="spinner"></div>

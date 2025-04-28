@@ -1,13 +1,19 @@
 import { useState } from "react";
 
-export function Experience({ previewMode, experience, setExperience }) {
+export function Experience({
+  previewMode,
+  experience,
+  setExperience,
+  expEditing,
+  setExpEditing,
+  experienceStatus,
+  setExperienceStatus,
+}) {
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [location, setLocation] = useState("");
-  const [isEditing, setIsEditing] = useState(true);
-  const [status, setStatus] = useState("editing");
   const [editIndex, setEditIndex] = useState(null);
   const [currentlyWorking, setCurrentlyWorking] = useState(false);
 
@@ -35,14 +41,14 @@ export function Experience({ previewMode, experience, setExperience }) {
     setEndDate("");
     setLocation("");
     setCurrentlyWorking(false);
-    setStatus("saving");
+    setExperienceStatus("saving");
     await sendMessage();
-    setIsEditing(!isEditing);
-    setStatus("saved");
+    setExpEditing(!expEditing);
+    setExperienceStatus("saved");
   }
 
   async function handleEdit(index) {
-    setStatus("editing");
+    setExperienceStatus("editing");
     await sendMessage();
     const exp = experience[index];
     setCompany(exp.company);
@@ -52,22 +58,22 @@ export function Experience({ previewMode, experience, setExperience }) {
     setLocation(exp.location);
     setCurrentlyWorking(exp.currentlyWorking);
     setEditIndex(index);
-    setIsEditing(!isEditing);
+    setExpEditing(!expEditing);
   }
 
   async function handleDelete(index) {
-    setStatus("deleted");
+    setExperienceStatus("deleted");
     await sendMessage();
     const updatedExperience = experience.filter((_, i) => i !== index);
     setExperience(updatedExperience);
-    setStatus("saved");
+    setExperienceStatus("saved");
   }
 
   async function handleAdd() {
-    setStatus("opening");
+    setExperienceStatus("opening");
     await sendMessage();
-    setStatus("saved");
-    setIsEditing(!isEditing);
+    setExperienceStatus("saved");
+    setExpEditing(!expEditing);
   }
 
   function sendMessage() {
@@ -107,7 +113,7 @@ export function Experience({ previewMode, experience, setExperience }) {
     return (
       <div>
         <h1>Experience</h1>
-        {isEditing ? (
+        {expEditing ? (
           <div>
             <form onSubmit={handleSubmit}>
               <div>
@@ -181,7 +187,7 @@ export function Experience({ previewMode, experience, setExperience }) {
                 </button>
               </div>
             </form>
-            {status === "saving" && (
+            {experienceStatus === "saving" && (
               <div>
                 <p>Saving...</p>
                 <div className="spinner"></div>
@@ -190,7 +196,7 @@ export function Experience({ previewMode, experience, setExperience }) {
           </div>
         ) : (
           <div>
-            {status === "saved" && (
+            {experienceStatus === "saved" && (
               <div>
                 <h3>Preview:</h3>
                 {experience.length > 0 ? (
@@ -223,23 +229,26 @@ export function Experience({ previewMode, experience, setExperience }) {
                     <button onClick={handleAdd}>Add experience</button>
                   </div>
                 ) : (
-                  <p>No experience added yet</p>
+                  <>
+                    <p>No experience added yet</p>
+                    <button onClick={handleAdd}>Add experience</button>
+                  </>
                 )}
               </div>
             )}
-            {status === "deleted" && (
+            {experienceStatus === "deleted" && (
               <div>
                 <p>Deleting...</p>
                 <div className="spinner"></div>
               </div>
             )}
-            {status === "editing" && (
+            {experienceStatus === "editing" && (
               <div>
                 <p>Opening data in edit mode...</p>
                 <div className="spinner"></div>
               </div>
             )}
-            {status === "opening" && (
+            {experienceStatus === "opening" && (
               <div>
                 <p>Opening form! Please wait...</p>
                 <div className="spinner"></div>
