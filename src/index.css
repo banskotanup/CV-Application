@@ -12,3 +12,24 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  @media print{
+    button{
+      display: none;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  
+    /* Hide elements you don't want to print */
+    header, footer, nav, .no-print {
+      display: none !important;
+    }
+  
+    /* Print only the CV part cleanly */
+    .cv-container {
+      margin: 0;
+      padding: 0;
+    }
+  }
