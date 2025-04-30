@@ -277,7 +277,7 @@ export function Experience({
           )}
         </div>
         <div className="img">
-          <img src="../public/images/we.png" alt="" />
+          <img src="./images/we.png" alt="" />
         </div>
       </div>
     );

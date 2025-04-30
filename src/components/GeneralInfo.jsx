@@ -170,7 +170,7 @@ export function GeneralInfo({
           )}
         </div>
         <div className="img">
-          <img src="../public/images/pi.png" alt="" />
+          <img src="./images/pi.png" alt="" />
         </div>
       </div>
     );

@@ -130,7 +130,7 @@ export function Education({
     return (
       <div className="eduContainer">
         <div>
-          <img src="../public/images/edu.png" alt="" />
+          <img src="./images/edu.png" alt="" />
         </div>
         <div className="educationSection">
           <h1>Education</h1>
