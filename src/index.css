@@ -203,6 +203,9 @@ li {
 
 /* Responsive tweaks */
 @media (max-width: 600px) {
+  html, body{
+    overflow-x: hidden;
+  }
   .generalInfo,
   .experienceSection,
   .educationSection {
@@ -212,9 +215,8 @@ li {
   }
 
   button {
-    width: 95%;
+    width: 100%;
     margin-top: 5px;
-    margin-left: 10px;
     margin-bottom: 5px;
   }
 
@@ -252,7 +254,7 @@ li {
   }
 
   .generateCV {
-    margin-left: 5px;
+    width: 95%;
     transform: translateX(-60%);
   }
 
