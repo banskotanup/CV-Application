@@ -1,35 +1,432 @@
+/* General page styling */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #357abd;
+  border-radius: 10px;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.generalContainer,
+.expContainer {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  margin-top: 10px;
+}
+
+.eduContainer {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  margin-top: 10px;
+}
+
+.generalContainer div img {
+  margin-left: 10%;
+  height: 100%;
+  width: 70%;
+}
+
+.expContainer div img {
+  margin-left: 10%;
+  height: 100%;
+  width: 70%;
+}
+
+.eduContainer div img {
+  margin-left: 10%;
+  height: 100%;
+  width: 70%;
+}
+
+/* General container */
+.generalInfo,
+.experienceSection {
+  width: 50vw;
+  margin-left: 7%;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.educationSection {
+  width: 50vw;
+  margin-right: 4%;
+  margin-left: 3%;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling */
+form > div {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+/* Buttons */
+button {
+  background-color: #4a90e2;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 20px;
+}
+
+.btnDelete {
+  background-color: red;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btnDelete:hover {
+  background-color: darkred;
+}
+
+button:hover {
+  background-color: #357abd;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Spinner */
 .spinner {
-    width: 20px;
-    height: 20px;
-    border: 3px solid lightgray;
-    border-top: 3px solid black;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-left: 10px;
+  width: 30px;
+  height: 30px;
+  border: 4px solid #ccc;
+  border-top-color: #4a90e2;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 1rem auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+}
+
+/* Preview section */
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h3 {
+  margin-top: 2rem;
+  color: #4a90e2;
+}
+
+.preview {
+  margin-top: 1rem;
+}
+
+.preview div {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #f9fafb;
+  border-left: 4px solid #4a90e2;
+  border-radius: 6px;
+}
+
+/* Experience List */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #f9fafb;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 6px;
+  border-left: 4px solid #4a90e2;
+}
+
+/* Centered text when needed */
+.center-text {
+  text-align: center;
+  color: #777;
+  margin-top: 1.5rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .generalInfo,
+  .experienceSection,
+  .educationSection {
+    margin: 1rem;
+    padding: 1.5rem;
+    width: 80vw;
   }
 
-  @media print{
-    button{
-      display: none;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-    }
-  
-    /* Hide elements you don't want to print */
-    header, footer, nav, .no-print {
-      display: none !important;
-    }
-  
-    /* Print only the CV part cleanly */
-    .cv-container {
-      margin: 0;
-      padding: 0;
-    }
+  button {
+    width: 95%;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-bottom: 5px;
   }
+
+  .img {
+    display: none;
+    margin-left: 10%;
+    height: 100%;
+    width: 70%;
+  }
+
+  .expContainer div img {
+    display: none;
+    margin-left: 10%;
+    height: 100%;
+    width: 70%;
+  }
+
+  .eduContainer div img {
+    display: none;
+    margin-left: 10%;
+    height: 100%;
+    width: 70%;
+  }
+
+  .generalContainer,
+  .expContainer {
+    display: grid;
+    margin-top: 10px;
+  }
+
+  .eduContainer {
+    display: grid;
+    grid-template-columns: 100%;
+    margin-top: 10px;
+  }
+
+  .generateCV {
+    margin-left: 5px;
+    transform: translateX(-60%);
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="date"] {
+    width: 90%;
+  }
+}
+
+@media print {
+  button {
+    display: none;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Hide elements you don't want to print */
+  header,
+  footer,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Print only the CV part cleanly */
+  .cv-container {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.message p {
+  text-align: center;
+}
+
+.check-box {
+  display: flex;
+  align-items: flex-start;
+}
+
+.generateCV {
+  margin-left: 60%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  background-color: orange;
+}
+
+.generateCV:hover {
+  background-color: darkorange;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  height: 60px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.footer p {
+  margin-right: 40px;
+}
+.cv-preview {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  color: #333;
+  font-family: "Playfair Display", serif;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  line-height: 1.6;
+  border-radius: 8px;
+}
+
+.cv-preview h2 {
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.cv-preview .section {
+  margin-bottom: 2rem;
+}
+
+.cv-preview .section p,
+.cv-preview .section li {
+  margin-bottom: 0.5rem;
+}
+
+.cv-preview ul {
+  padding-left: 1.2rem;
+  list-style-type: disc;
+}
+
+.cv-preview .info-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.cv-preview .info-item {
+  flex: 1 1 45%;
+  margin-bottom: 0.5rem;
+}
+
+.cv-preview .label {
+  font-weight: bold;
+  display: inline-block;
+  width: 100px;
+}
+
+.cv-preview .value {
+  display: inline-block;
+}
+
+.cv {
+  text-align: center;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #333;
+    margin: 0;
+    padding: 0;
+    color: #f5f7fa;
+  }
+
+  .generalInfo,
+  .experienceSection {
+    background: #333;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .educationSection {
+    background: #333;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  label {
+    color: #f5f7fa;
+  }
+
+  .preview div {
+    background: #333;
+  }
+
+  li {
+    background: #555;
+  }
+
+  /* Centered text when needed */
+  .center-text {
+    color: #777;
+  }
+}
